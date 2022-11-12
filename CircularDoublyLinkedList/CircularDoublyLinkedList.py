@@ -55,6 +55,75 @@ class CircularDoublyLinkedList:
                 newNode.next = temp
                 temp.prev = newNode
                 node.next = newNode
+    
+    def traverseCDLL(self):
+        if self.head is None:
+            return "There is not any element for traversal."
+        temp = self.head
+        while temp:
+            print(temp.value,end=" ")
+            temp = temp.next
+            if temp == self.tail.next:
+                break
+    
+    def reverseTraverseCDLL(self):
+        if self.head is None:
+            print("There is not any element to traverse.")
+        else:
+            node = self.tail
+            while node:
+                print(node.value,end=" ")
+                node = node.prev
+                if node == self.head.prev:
+                    break
+    
+    def searchCDLL(self, value):
+        if self.head is None:
+            return "There is not any element in the list."
+        else:
+            node = self.head
+            while node:
+                if node.value == value:
+                    return node.value
+                node = node.next
+                if node == self.tail.next:
+                    return "The node does not exist in this CDLL."
+
+    def deleteNode(self, value):
+        if self.head is None:
+            return "There is not any element in the list."
+        
+        elif value == self.head.value:
+            self.head = self.head.next
+            if self.head is not None:
+                self.head.prev = None
+
+        elif value == self.tail.value:
+            self.tail = self.tail.prev
+            self.tail.next = None
+
+        else:
+            node = self.head
+            while node:
+                if node.value == value:
+                    break
+                node = node.next
+            temp = node.prev
+            node.next.prev = temp
+            temp.next = node.next
+
+    def deleteCDLL(self):
+        if self.head is None:
+            return "There is not any element in the list."
+        else:
+            node = self.head
+            self.tail.next = None
+            while node:
+                node.prev = None
+                node = node.next
+            self.head = None
+            self.tail = None
+
 
 def main():
     cdll = CircularDoublyLinkedList()
@@ -71,20 +140,20 @@ def main():
     cdll.insertCDLL(3, 3)
     print([node.value for node in cdll])
     # dll.reverseTraverse()
-    # dll.traverseDLL()
-    # print(dll.searchDLL(4))
+    cdll.traverseCDLL()
+    print(cdll.searchCDLL(4))
     # print(dll.searchDLL(6))
-    # dll.deleteNode(0)
-    # dll.reverseTraverse()
-    # print([node.value for node in dll])
+    cdll.deleteNode(0)
+    cdll.reverseTraverseCDLL()
+    print(f'\n{[node.value for node in cdll]}')
     # dll.deleteNode(5)
     # dll.reverseTraverse()
     # print([node.value for node in dll])
     # dll.deleteNode(2)
     # dll.reverseTraverse()
     # print([node.value for node in dll])
-    # dll.deleteDLL()
-    # print([node.value for node in dll])
+    cdll.deleteCDLL()
+    print([node.value for node in cdll])
 
 main()
                 
