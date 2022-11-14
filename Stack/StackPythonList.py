@@ -25,9 +25,9 @@ class Stack:
     
     def peek(self):
         if self.isEmpty():
-            return "The stack is empty."
+            print ("The stack is empty.")
         else:
-            self.list[len(self.list) - 1]
+            print (self.list[len(self.list) - 1])
         
     def delete(self):
         self.list = []
